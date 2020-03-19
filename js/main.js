@@ -93,6 +93,7 @@
       var $portfolio_container = $(".portfolio_grid");
       $portfolio_container.imagesLoaded(function() {
         portfolio_init(this);
+        $("#preface-id").trigger("click");
       });
       $(" #portfolio_grid > figure ").each(function() {
         $(this).hoverdir();
@@ -196,3 +197,5 @@
     })
     .on("DOMSubtreeModified", subpages_resize);
 })(jQuery);
+
+$("#preface-id").click();
