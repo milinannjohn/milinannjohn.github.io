@@ -88,6 +88,9 @@
         $contactForm.append(
           '<div class="alert alert--error">Ops, there was an error.</div>'
         );
+        setTimeout(() => {
+          $(".alert").fadeOut();
+        }, 2000);
       }
     });
   });
