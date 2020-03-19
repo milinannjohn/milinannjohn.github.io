@@ -32,7 +32,7 @@
   //   $("#contact-form").validator();
   //   $("#contact-form").on("submit", function(e) {
   //     if (!e.isDefaultPrevented()) {
-  //       var url = "https://formspree.io/xzbvvnwr";
+  //       var url = "contact_form/contact_form.php";
   //       $.ajax({
   //         type: "POST",
   //         url: url,
@@ -60,6 +60,38 @@
   //     }
   //   });
   // });
+
+  var $contactForm = $("#contact-form");
+  $contactForm.submit(function(e) {
+    e.preventDefault();
+    $.ajax({
+      url: "https://formspree.io/xzbvvnwr",
+      method: "POST",
+      data: $(this).serialize(),
+      dataType: "json",
+      beforeSend: function() {
+        $contactForm.append(
+          '<div class="alert alert--loading">Sending message…</div>'
+        );
+      },
+      success: function(data) {
+        $contactForm.find(".alert--loading").hide();
+        $contactForm.append(
+          '<div class="alert alert--success">Message sent!</div>'
+        );
+        setTimeout(() => {
+          $(".alert").fadeOut();
+        }, 2000);
+      },
+      error: function(err) {
+        $contactForm.find(".alert--loading").hide();
+        $contactForm.append(
+          '<div class="alert alert--error">Ops, there was an error.</div>'
+        );
+      }
+    });
+  });
+
   function mobileMenuHide() {
     var windowWidth = $(window).width();
     if (windowWidth < 1024) {
